@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ToDo App</title>
+    </head>
+    <body>
+        <h1>
+            ToDo App
+        </h1>
+        <form action="post" method="POST">
+            <label>ToDo<input tyoe="text" name="todo"></label>
+        </form>
+        <ul>
+            {{ todos.forEach(todo => {
+
+            }}
+                <li>{{todo.todo}}<span id="{{todo.id}}">delete</span></li>
+            {{
+            })
+            }}
+    </body>
+</html>
