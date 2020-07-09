@@ -18,9 +18,10 @@ export class ToDoService {
 
     }*/
 
-    async create(title: string): Promise<ToDo[]> {
+    async create(title: string, limit: Date | null): Promise<ToDo[]> {
         const todo = new ToDo();
         todo.title = title;
+        todo.limit = limit;
         try {
             await this.todoRepository.save(todo);
         } catch (error){

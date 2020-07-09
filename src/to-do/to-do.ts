@@ -11,6 +11,9 @@ export class ToDo implements IToDo {
     @Column()
     title: string;
 
+    @Column({ nullable: true, type: 'date'})
+    limit: Date | null;
+
     @CreateDateColumn()
     createAt: Date;
 

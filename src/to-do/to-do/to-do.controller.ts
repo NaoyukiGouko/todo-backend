@@ -18,8 +18,8 @@ export class ToDoController {
     }
 
     @Post('create')
-    async create(@Body('title')title: string): Promise<ToDo[]> {
-        return this.todoService.create(title);
+    async create(@Body('title')title: string, @Body('limit')limit: Date | null): Promise<ToDo[]> {
+        return this.todoService.create(title, limit);
     }
 
     @Post(':id')
