@@ -5,18 +5,18 @@ import { IToDo } from './to-do.interface';
 
 @Entity()
 export class ToDo implements IToDo {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    title: string;
+  @Column()
+  title: string;
 
-    @Column({ nullable: true, type: 'date'})
-    limit: Date | null;
+  @Column({ nullable: true, type: 'date'})
+  limit: Date | null;
 
-    @CreateDateColumn()
-    createAt: Date;
+  @CreateDateColumn()
+  createAt: Date;
 
-    @UpdateDateColumn()
-    updateAt: Date;
+  @UpdateDateColumn()
+  updateAt: Date;
 }
