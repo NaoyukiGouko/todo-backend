@@ -13,7 +13,7 @@ export class ToDoService {
     return await this.todoRepository.find();
   }
 
-  async create(todo: Todo): Promise<ToDo> {
+  async create(todo: ToDo): Promise<ToDo> {
     const newTodo = await this.todoRepository.save(todo);
     return newTodo;
   }
