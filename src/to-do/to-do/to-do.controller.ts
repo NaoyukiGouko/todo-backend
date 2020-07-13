@@ -18,12 +18,12 @@ export class ToDoController {
   }
 
   @Post('create')
-  async create(@Body() todo: ToDo): Promise<ToDo[]> {
+  async create(@Body() todo: ToDo): Promise<ToDo> {
     return this.todoService.create(todo.title, todo.limit);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: number): Promise<ToDo[]> {
+  async delete(@Param('id') id: number): Promise<number> {
     return this.todoService.delete(id);
   }
 }
