@@ -2,6 +2,7 @@ import {
   Controller,
   Post,
   Get,
+  Delete,
   Body,
   Param
 } from '@nestjs/common';
@@ -18,10 +19,11 @@ export class ToDoController {
 
   @Post('create')
   async create(@Body() todo: ToDo): Promise<ToDo[]> {
-    return this.todoService.create(todo)
+    return this.todoService.create(todo);
+
   }
 
-  @Post(':id')
+  @Delete(':id')
   async delete(@Param('id') id: number): Promise<ToDo[]> {
     return this.todoService.delete(id);
   }
