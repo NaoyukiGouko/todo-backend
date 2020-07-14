@@ -20,6 +20,7 @@ export class ToDoController {
   @Post('create')
   async create(@Body() todo: ToDo): Promise<ToDo[]> {
     return this.todoService.create(todo);
+
   }
 
   @Delete(':id')
