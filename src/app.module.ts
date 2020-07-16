@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ToDoService } from './to-do/to-do/to-do.service';
-import { ToDoModule } from './to-do/to-do/to-do.module';
-import { ToDo } from './to-do/to-do';
+import { TodoService } from './to-do/to-do/to-do.service';
+import { TodoModule } from './to-do/to-do/to-do.module';
+import { Todo } from './to-do/to-do';
 
 @Module({
   imports: [
@@ -15,11 +15,11 @@ import { ToDo } from './to-do/to-do';
       username: 'admin',
       password: 'admin',
       database: 'testdb',
-      entities: [ToDo],
+      entities: [Todo],
       synchronize: true,
     }),
-    ToDoModule],
+    TodoModule],
   controllers: [AppController],
-  providers: [AppService, ToDoService],
+  providers: [AppService, TodoService],
 })
 export class AppModule {}

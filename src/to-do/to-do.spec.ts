@@ -1,7 +1,7 @@
-import { ToDo } from './to-do';
+import { Todo } from './to-do';
 
-describe('ToDo', () => {
+describe('Todo', () => {
   it('should be defined', () => {
-    expect(new ToDo()).toBeDefined();
+    expect(new Todo()).toBeDefined();
   });
 });
