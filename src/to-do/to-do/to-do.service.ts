@@ -14,8 +14,7 @@ export class ToDoService {
   }
 
   async create(todo: ToDo): Promise<ToDo> {
-    const newTodo = await this.todoRepository.save(todo);
-    return newTodo;
+    return await this.todoRepository.save(todo);
   }
 
   async delete(id: number): Promise<number> {
