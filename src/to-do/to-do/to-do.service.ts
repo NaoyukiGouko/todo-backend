@@ -13,19 +13,14 @@ export class ToDoService {
     return await this.todoRepository.find();
   }
 
-  async create(todo: ToDo): Promise<ToDo[]> {
-    try {
-      await this.todoRepository.save(todo);
-    } catch (error){
-      console.log(error);
-    }
-    return await this.findAll();
+  async create(todo: ToDo): Promise<ToDo> {
+    return await this.todoRepository.save(todo);
   }
 
-  async delete(id: number): Promise<ToDo[]> {
-    const todo = await this.todoRepository.findOne(id)
-    await this.todoRepository.remove(todo)
-    return await this.findAll();
+  async delete(id: number): Promise<number> {
+    const todo = await this.todoRepository.findOne(id);
+    await this.todoRepository.remove(todo);
+    return id;
   }
 
   
