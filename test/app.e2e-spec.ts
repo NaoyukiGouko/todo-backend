@@ -1,18 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
+import { Connection } from 'typeorm';
 import { TodoModule } from './../src/to-do/to-do/to-do.module';
 import { Todo } from './../src/to-do/to-do';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 describe('Todo', () => {
   let app: INestApplication;
-
-  const cre = {
-    query: {
-      title: test
-    }
-  };
+  let connection: Connection;
 
   beforeEach(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
@@ -31,6 +27,7 @@ describe('Todo', () => {
 
       app = moduleRef.createNestApplication();
       await app.init();
+      connection = app.get(Connection);
 
   });
 
@@ -40,7 +37,7 @@ describe('Todo', () => {
       .expect(200)
   });
 
-  it('/POST create', () => {
+  it('todoを登録することができるか', () => {
     return request(app.getHttpServer())
       .post('/create')
       .type('json')
@@ -48,9 +45,13 @@ describe('Todo', () => {
       .expect(201)
   });
 
-  it('/DELETE :id', () => {
+  it('上記テストで登録したtodoを削除できるか', async () => {
+    const deleteTodo = await connection.manager
+    .createQueryBuilder(Todo, 'todo')
+    .orderBy('todo.id', "DESC").getOne();
+
     return request(app.getHttpServer())
-      .delete('/7')
+      .delete(`/${deleteTodo.id}`)
       .expect(200)
   });
 
