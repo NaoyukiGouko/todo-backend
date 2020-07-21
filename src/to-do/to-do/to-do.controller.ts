@@ -6,19 +6,19 @@ import {
   Body,
   Param
 } from '@nestjs/common';
-import { ToDoService } from './to-do.service';
-import { ToDo } from '../to-do';
+import { TodoService } from './to-do.service';
+import { Todo } from '../to-do';
 
 @Controller('')
-export class ToDoController {
-  constructor(private readonly todoService: ToDoService){}
+export class TodoController {
+  constructor(private readonly todoService: TodoService){}
   @Get()
-  async findAll(): Promise<ToDo[]> {
+  async findAll(): Promise<Todo[]> {
     return this.todoService.findAll();
   }
 
   @Post('create')
-  async create(@Body() todo: ToDo): Promise<ToDo> {
+  async create(@Body() todo: Todo): Promise<Todo> {
     return this.todoService.create(todo);
   }
 

@@ -4,7 +4,7 @@ import { Entity, Column, PrimaryGeneratedColumn, /*PrimaryColumn,*/ CreateDateCo
 import { IToDo } from './to-do.interface';
 
 @Entity()
-export class ToDo implements IToDo {
+export class Todo implements IToDo {
   @PrimaryGeneratedColumn()
   id: number;
 
