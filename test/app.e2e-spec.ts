@@ -33,16 +33,30 @@ describe('Todo', () => {
 
   it('/ (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
+    .get('/')
+    .expect(200)
   });
 
-  it('todoを登録することができるか', () => {
-    return request(app.getHttpServer())
-      .post('/create')
-      .type('json')
-      .send({title: "test"})
-      .expect(201)
+  it('todoを登録することができるか', async () => {
+    const res = await request(app.getHttpServer())
+    .post('/create')
+    .type('json')
+    .send({title: "test"})
+    .expect(201);
+
+    const resBody = {
+      title: res.body.title,
+      id: res.body.id,
+      limit: res.body.limit,
+      createAt: new Date(res.body.createAt),
+      updateAt: new Date(res.body.updateAt)
+    }
+
+    const newTodo = await connection.manager
+    .createQueryBuilder(Todo, 'todo')
+    .orderBy('todo.id', 'DESC').getOne();
+    
+    expect(resBody).toMatchObject(newTodo);
   });
 
   it('上記テストで登録したtodoを削除できるか', async () => {
@@ -50,10 +64,18 @@ describe('Todo', () => {
     .createQueryBuilder(Todo, 'todo')
     .orderBy('todo.id', "DESC").getOne();
 
-    return request(app.getHttpServer())
-      .delete(`/${deleteTodo.id}`)
-      .expect(200)
+    await request(app.getHttpServer())
+    .delete(`/${deleteTodo.id}`)
+    .expect(200);
+
+    const testTodo = await connection.manager
+    .createQueryBuilder(Todo, 'todo')
+    .where(`todo.id = ${deleteTodo.id}`).getOne();
+
+    expect(testTodo).toBeFalsy();
   });
+
+
 
   afterEach(async () => {
     await app.close();
